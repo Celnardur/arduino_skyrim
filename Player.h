@@ -8,19 +8,18 @@
 #include "Pos.h"
 #include "Constants.h"
 #include "Input.h"
+#include "Move.h"
 
 class Player {
 public:
-    void construct(uint16_t room_height, uint16_t room_width);
+    void construct();
     void render(Adafruit_SSD1306 * display) const;
 
-    void move(const Input & input);
+    Move move_logic(const Input & input);
 
     Pos get_pos() const { return this->pos; };
-    Pos get_center() const { 
-        Pos pos(this->pos.x + PLAYER_WIDTH/2, this->pos.y - PLAYER_HEIGHT/2);
-        return pos;
-    };
+    Pos * get_pos_pointer() { return &this->pos; };
+    Pos get_center() const;
 private:
     Pos pos;
 };

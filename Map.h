@@ -6,11 +6,14 @@
 #include <Adafruit_SSD1306.h>
 #include "Pos.h"
 #include "Constants.h"
+#include "BoundingBox.h"
 
 class Map {
 public:
     void construct_start();
-    void render(Adafruit_SSD1306 * display, Pos center);
+    void render(Adafruit_SSD1306 * display, int origin_x, int origin_y) const;
+
+    byte check_box(Box box, Box * collisions, long tick) const;
 private:
     uint32_t room[ROOM_SIZE];
 };
