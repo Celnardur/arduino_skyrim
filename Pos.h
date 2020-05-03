@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include "Constants.h"
+#include "Move.h"
 
 #define abs(x) ((x)<0 ? -(x) : (x))
 #define min(x, y) ((x)<(y) ? (x) : (y))
@@ -13,6 +14,8 @@ public:
     Pos() : x(0), y(0) {}
     Pos(byte x, byte y) : x(x), y(y) {}
 
+    byte tile_x() const { return this->x/PIXEL_SIZE/TILE_SIZE; }
+    byte tile_y() const { return this->y/PIXEL_SIZE/TILE_SIZE; }
     byte pixel_x() const { return this->x/PIXEL_SIZE; }
     byte pixel_y() const { return this->y/PIXEL_SIZE; }
     uint16_t get_x() const { return this->x; }
@@ -44,6 +47,8 @@ public:
     // takes in subpixels to add to the position/
     // returns true if position is on edge. 
     Pos add(int32_t x, int32_t y);
+
+    void add_move(Move mv) { this->add(mv.speed*mv.x, mv.speed*mv.y); }
 
     void print() const;
 

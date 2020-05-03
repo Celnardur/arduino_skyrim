@@ -7,15 +7,21 @@
 #include "Pos.h"
 #include "Constants.h"
 #include "BoundingBox.h"
+#include "Move.h"
 
 class Map {
 public:
     void construct_start();
+    void construct_empty();
     void render(Adafruit_SSD1306 * display, int origin_x, int origin_y) const;
 
-    byte check_box(Box box, Box * collisions, long tick) const;
+    bool get_tile(byte x, byte y) const;
+    void set_tile(byte x, byte y, bool value);
+
+    byte check_box(Box box, Box * collisions) const;
+    bool can_see(const Pos &from, const Pos &to) const;
 private:
-    uint32_t room[ROOM_SIZE];
+    uint16_t room[ROOM_SIZE];
 };
 
 #endif

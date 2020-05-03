@@ -1,12 +1,9 @@
 #ifndef SPRITES_H
 #define SPRITES_H
 
-#define DRAGON_HEIGHT 45
-#define DRAGON_WIDTH 24
 
 #define DOVAHKIIN_HEIGHT 8
 #define DOVAHKIIN_WIDTH 8
-
 static const unsigned char dovahkiin[8] PROGMEM = {
     B10000010,
     B01000100,
@@ -18,6 +15,21 @@ static const unsigned char dovahkiin[8] PROGMEM = {
     B01101100,
 };
 
+#define NORMAL_MONSTER_HEIGHT 8
+#define NORMAL_MONSTER_WIDTH 8
+static const unsigned char normal_monster[8] PROGMEM = {
+    B01100110,
+    B11000011,
+    B11000011,
+    B01100110,
+    B01111110,
+    B11011011,
+    B11000011,
+    B01100110,
+};
+
+#define DRAGON_HEIGHT 45
+#define DRAGON_WIDTH 24
 static const unsigned char dragon[] PROGMEM = {
     B00000000, B10000001, B00000000,
     B00000000, B11000011, B00000000,

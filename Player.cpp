@@ -4,26 +4,27 @@
 
 void Player::construct() { 
     this->pos.set_map(ROOM_SIZE/2, ROOM_SIZE/2);
+    this->last_move = {PLAYER_SPEED, 1, 0};
+    this->cooldown = 0;
+}
+
+void Player::update() {
+    if (this->cooldown > 0) {
+        --this->cooldown;
+    }
 }
 
 Move Player::move_logic(const Input & input) {
-    return {
+    Move mv = {
         PLAYER_SPEED,
         input.x(), 
         -1*input.y(),
-        true
     };
+    if (input.x() != 0 || input.y() != 0) {
+        this->last_move = mv;
+    }
+    return mv;
 }
-
-/*
-void Player::move(const Input & input) {
-    int32_t speed = 1024;
-    int32_t x_move = speed * input.x();
-    int32_t y_move =-1 * speed * input.y();
-    this->pos.add(x_move, y_move);
-    this->pos.print();
-}
-*/
 
 void Player::render(Adafruit_SSD1306 * display) const {
     display->drawBitmap(
@@ -37,4 +38,11 @@ Pos Player::get_center() const {
     Pos center = this->pos;
     center.add_pixel(PLAYER_WIDTH/2, PLAYER_HEIGHT/2);
     return center;
+}
+
+Attack Player::attack_right() {
+    Attack attack;
+    this->cooldown = attack.magic(
+            this->pos, this->last_move, PLAYER_WIDTH, PLAYER_HEIGHT);
+    return attack;
 }

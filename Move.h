@@ -5,7 +5,15 @@ struct Move {
    int32_t speed;
    float x;
    float y;
-   bool moving;
 };
+
+#define print_move(mv) \
+    Serial.println("Move {");\
+    Serial.println("    " + String(mv.speed));\
+    Serial.println("    " + String(mv.x));\
+    Serial.println("    " + String(mv.y));\
+    Serial.println("}");
+
+
 
 #endif

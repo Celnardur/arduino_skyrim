@@ -63,6 +63,7 @@ void setup() {
     display.println(F("Skyrim"));
     display.display();
 
+
     // load things
     input.construct();
     game.construct();
@@ -76,7 +77,7 @@ void setup() {
 void loop() {
 
     static unsigned long prevMillis = millis();
-    static long tick = 0;
+    static uint32_t tick = 0;
     static const long MS_PER_UPDATE PROGMEM = 100;
 
     input.process();
@@ -84,6 +85,7 @@ void loop() {
     if (millis() - prevMillis >= MS_PER_UPDATE) {
         prevMillis = millis();
         game.update(input, tick);
+        //Serial.println(millis() - prevMillis);
         game.render(&display);
         input.clear();
         ++tick;

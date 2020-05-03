@@ -16,6 +16,7 @@ bool has_collided(Box one, Box two) {
 
 /*
 // little algorthim for "sliding" the colliding box when there is a collision
+// doesn't work for walls or corners 
 Box box_slide(Box mobile, Box still) {
     // up down left right
     int direction[4] = {
